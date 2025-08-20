@@ -6,7 +6,7 @@ import argparse
 import time
 import os
 
-mcp = FastMCP("sample_mcp", port=3002, debug=True)
+mcp = FastMCP("sample_mcp", port=3002, host="0.0.0.0", debug=True)
 
 # 必填：如果设置了 default 属性，则不是required
 # 默认值建议同时写一份到tool说明里，因为它不会展示给用户。
@@ -31,12 +31,6 @@ async def book_hotel(
     if guests > 4:
         raise Exception(f"同一间房入住人数最多4人")
     
-    if guest_name == "瞌睡虫":
-        time.sleep(45*3600)
-
-    if guest_name == "崩溃哥":
-        os._exit(0)
-
     return f"你好 {guest_name} 你预定的是 {room_type} 一共 {guests} 位客人"
 
 def main():
