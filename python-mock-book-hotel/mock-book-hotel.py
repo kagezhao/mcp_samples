@@ -6,7 +6,7 @@ import argparse
 import time
 import os
 
-mcp = FastMCP("sample_mcp", port=3002, host="0.0.0.0", debug=True)
+mcp = FastMCP("sample_mcp", port=3002, host="0.0.0.0", stateless_http=True)
 
 # 必填：如果设置了 default 属性，则不是required
 # 默认值建议同时写一份到tool说明里，因为它不会展示给用户。
@@ -35,7 +35,7 @@ async def book_hotel(
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--transport', type=str, default='stdio', help='stdio/sse/streamable-http (default: stdio)')  # Add transport argument
+    parser.add_argument('--transport', type=str, default='streamable-http', help='stdio/sse/streamable-http (default: stdio)')  # Add transport argument
     args = parser.parse_args()
 
     transport = args.transport
