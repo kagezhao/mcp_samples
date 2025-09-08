@@ -2,6 +2,7 @@ import signal
 from typing import Literal
 from pydantic import Field
 from mcp.server.fastmcp import FastMCP, Context
+from mcp.types import ToolAnnotations
 import argparse
 import time
 import os
@@ -15,7 +16,7 @@ mcp = FastMCP("sample_mcp", port=3002, host="0.0.0.0", stateless_http=True)
 # 用户输入问题：为客人张三预定酒店，要标间
 
 
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(title="预定房间"))
 async def book_hotel(
         context: Context,
         guest_name: str = Field(description="客人姓名"),
